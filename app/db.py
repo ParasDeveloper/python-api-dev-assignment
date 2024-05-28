@@ -1,10 +1,12 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from . import models 
+from sqlalchemy.pool import NullPool
 
 
 DATABASE_URL = "sqlite:///C:\\dev\\youtube-trending\\data\\youtube_data.db"
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL,connect_args={"check_same_thread": False},
+    poolclass=NullPool)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_db():

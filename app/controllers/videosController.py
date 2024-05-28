@@ -23,7 +23,7 @@ def get_video(
             continue
         column_exists = check_if_column_exists(model=models.Video, attribute=key)
         if column_exists is True:
-            query = query.filter(getattr(models.Video, key) == value)
+            query = query.filter(getattr(models.Video, key).ilike(f'%{value}%'))
 
 
     valid_columns = []
